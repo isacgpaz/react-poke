@@ -3,7 +3,7 @@ import { usePokemons } from "../hooks/usePokemons";
 import { PokeCard } from "./PokeCard";
 
 export function PokeList() {
-  const { data, isLoading } = usePokemons();
+  const { data, isLoading } = usePokemons({ limit: 50 });
 
   if (isLoading) {
     return (
@@ -17,7 +17,7 @@ export function PokeList() {
 
   return (
     <div className="flex flex-col gap-8 w-full">
-      {data?.results?.map((pokemon) => <PokeCard {...pokemon} />)}
+      {data?.results?.map((pokemon) => <PokeCard key={pokemon?.order} {...pokemon} />)}
     </div>
   );
 }

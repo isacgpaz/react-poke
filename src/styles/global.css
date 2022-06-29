@@ -1,3 +1,79 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Pokemon colors to apply on cards */
+
+.green {
+  @apply bg-gradient-to-r from-green-500 to-emerald-600 text-green-900
+}
+
+.red {
+  @apply bg-gradient-to-r from-red-500 to-red-800 text-red-900
+}
+
+.blue {
+  @apply bg-gradient-to-r from-sky-500 to-blue-600 text-sky-900
+}
+
+.white {
+  @apply bg-gradient-to-r from-slate-400 to-slate-600 text-slate-700
+}
+
+.brown {
+  @apply bg-gradient-to-r from-yellow-600 to-yellow-900 text-stone-900
+}
+
+.yellow {
+  @apply bg-gradient-to-r from-amber-500 to-yellow-700 text-orange-900
+}
+
+.purple {
+  @apply bg-gradient-to-r from-violet-500 to-purple-900 text-purple-900
+}
+
+.pink {
+  @apply bg-gradient-to-r from-pink-500 to-rose-600 text-rose-900
+}
+
+/* Pokemon type colors to apply on type badges */
+
+.normal {
+  @apply bg-gray-700
+}
+
+.electric {
+  @apply bg-yellow-700
+}
+
+.grass {
+  @apply bg-green-700
+}
+
+.ground {
+  @apply bg-orange-700
+}
+
+.fairy {
+  @apply bg-pink-700
+}
+
+.fire {
+  @apply bg-red-700;
+}
+
+.water {
+  @apply bg-sky-700;
+}
+
+.bug {
+  @apply bg-amber-600;
+}
+
+.flying {
+  @apply bg-yellow-500;
+}
+
+.poison {
+  @apply bg-purple-600;
+}

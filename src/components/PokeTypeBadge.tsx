@@ -1,7 +1,13 @@
-export function PokeTypeBadge() {
+import classNames from "classnames";
+
+type PokeTypeBadgeProps = {
+  title: string;
+}
+
+export function PokeTypeBadge({ title }: PokeTypeBadgeProps) {
   return (
-    <div className="px-3 py-0.5 rounded-md bg-red-500 text-white w-fit">
-      <span>Fire</span>
+    <div className={classNames("px-3 py-0.5 rounded-md text-white w-fit", title)}>
+      <span className="capitalize text-sm">{title}</span>
     </div>
   );
 }

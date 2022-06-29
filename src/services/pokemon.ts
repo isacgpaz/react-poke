@@ -2,6 +2,11 @@ import { PokemonType } from "../interfaces/pokemon";
 import { RequestListOptionsType } from "../interfaces/request";
 import { api } from "./api";
 
+async function getPokemonSpecieRequest(nameOrId: string) {
+  const res = await api.get(`pokemon-species/${nameOrId}`);
+  return res.data;
+}
+
 export async function getPokemonRequest(nameOrId: string) {
   const res = await api.get<PokemonType>(`/pokemon/${nameOrId}`);
   return res.data;
@@ -10,7 +15,6 @@ export async function getPokemonRequest(nameOrId: string) {
 export async function getPokemonsRequest(
   requestListOptions?: RequestListOptionsType
 ) {
-  console.log(requestListOptions)
   const { data } = await api.get("/pokemon", {
     params: {
       ...requestListOptions,
@@ -19,7 +23,10 @@ export async function getPokemonsRequest(
   });
 
   const results = await Promise.all(
-    data.results.map(({ name }: PokemonType) => getPokemonRequest(name))
+    data.results.map(async ({ name }: PokemonType) => ({
+      ...await getPokemonRequest(name),
+      ...await getPokemonSpecieRequest(name)
+    }))
   );
 
   return {
