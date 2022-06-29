@@ -1,4 +1,4 @@
 export type RequestListOptionsType = {
-  page?: number;
+  offset?: number;
   limit?: number;
 }
