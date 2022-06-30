@@ -1,27 +1,22 @@
 import classNames from "classnames";
 import { ArrowLeft, ArrowRight, House } from "phosphor-react";
-import { useState } from "react";
 import { usePokemons } from "../hooks/usePokemons";
 import { PokeCard } from "./PokeCard";
 import { Spinner } from "./Spinner";
 import { useList } from "../hooks/useList";
-
-const LIMIT = 10;
-const INITIAL_OFFSET = 0;
+import { LIMIT } from "../constants/list";
 
 export function PokeList() {
-  const [offset, setOffset] = useState(INITIAL_OFFSET);
+  const {
+    isGrid,
+    limit,
+    offset,
+    setOffset,
+    toPreviousPage,
+    toNextPage
+  } = useList();
 
-  const { isGrid } = useList();
-  const { data, isLoading } = usePokemons({ limit: LIMIT, offset });
-
-  const toPreviousPage = () => {
-    setOffset((offset) => offset - LIMIT);
-  }
-
-  const toNextPage = () => {
-    setOffset((offset) => offset + LIMIT);
-  }
+  const { data, isLoading } = usePokemons({ limit, offset });
 
   if (isLoading) {
     return (

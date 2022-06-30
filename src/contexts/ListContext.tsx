@@ -1,4 +1,5 @@
-import { createContext, ReactNode, useMemo, useState } from "react";
+import { createContext, Dispatch, ReactNode, SetStateAction, useMemo, useState } from "react";
+import { INITIAL_OFFSET, LIMIT } from "../constants/list";
 
 type ListProviderProps = {
   children: ReactNode;
@@ -6,13 +7,27 @@ type ListProviderProps = {
 
 type ListContextProps = {
   isGrid: boolean;
+  limit: number;
+  offset: number;
+  setOffset: Dispatch<SetStateAction<number>>;
   toggleGrid(): void;
+  toPreviousPage(): void;
+  toNextPage(): void;
 }
 
 export const ListContext = createContext({} as ListContextProps);
 
 export function ListProvider({ children }: ListProviderProps) {
+  const [offset, setOffset] = useState(INITIAL_OFFSET);
   const [isGrid, setIsGrid] = useState(false);
+
+  const toPreviousPage = () => {
+    setOffset((offset) => offset - LIMIT);
+  }
+
+  const toNextPage = () => {
+    setOffset((offset) => offset + LIMIT);
+  }
 
   function toggleGrid() {
     setIsGrid(!isGrid);
@@ -20,10 +35,20 @@ export function ListProvider({ children }: ListProviderProps) {
 
   const contextValues = useMemo(() => ({
     isGrid,
-    toggleGrid
+    limit: LIMIT,
+    offset,
+    setOffset,
+    toggleGrid,
+    toPreviousPage,
+    toNextPage
   }), [
     isGrid,
-    toggleGrid
+    LIMIT,
+    offset,
+    setOffset,
+    toggleGrid,
+    toPreviousPage,
+    toNextPage
   ])
 
   return (
