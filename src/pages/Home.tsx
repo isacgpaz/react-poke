@@ -1,4 +1,3 @@
-import { MagnifyingGlass } from "phosphor-react";
 import { Header } from "../components/Header";
 import { PokeList } from "../components/PokeList";
 
@@ -12,7 +11,7 @@ export function Home() {
           Search for a pokémon by name or using its National Pokémon number.
         </p>
 
-        <div className="relative text-gray-700">
+        {/* <div className="relative text-gray-700">
           <span className="absolute inset-y-0 left-0 flex items-center pl-5">
             <MagnifyingGlass size={20} weight="bold" />
           </span>
@@ -21,7 +20,7 @@ export function Home() {
             placeholder="What pokémon are you looking for?"
             className="w-full py-4 text-sm bg-slate-200 rounded-xl pl-12 focus:outline-none focus:text-gray-900 focus:ring-2 ring-gray-700 transition-colors"
           />
-        </div>
+        </div> */}
       </div>
 
       <PokeList />

@@ -1,4 +1,4 @@
-import { Heart } from "phosphor-react";
+import { DotsNine, Heart, SlidersHorizontal } from "phosphor-react";
 import { Link } from "react-router-dom";
 
 export function Header() {
@@ -11,9 +11,19 @@ export function Header() {
         React Poké
       </Link>
 
-      <button>
-        <Heart className="text-orange-500" weight="fill" size={32} />
-      </button>
+      <div className="flex justify-end gap-4">
+        <button className="text-slate-900">
+          <DotsNine weight="bold" size={24} />
+        </button>
+
+        <button className="text-slate-900">
+          <SlidersHorizontal weight="fill" size={24} />
+        </button>
+
+        <button className="text-orange-500">
+          <Heart weight="fill" size={32} />
+        </button>
+      </div>
     </div>
   );
 }

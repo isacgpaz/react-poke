@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight } from "phosphor-react";
+import { ArrowLeft, ArrowRight, House } from "phosphor-react";
 import { useState } from "react";
 import { usePokemons } from "../hooks/usePokemons";
 import { PokeCard } from "./PokeCard";
@@ -30,7 +30,7 @@ export function PokeList() {
     <div className="flex flex-col gap-8 w-full">
       {data?.results?.map((pokemon) => <PokeCard key={pokemon?.order} {...pokemon} />)}
 
-      <div className="flex justify-between px-8">
+      <div className="flex justify-between">
         <button
           onClick={toPreviousPage}
           disabled={!data?.previous}
@@ -40,9 +40,15 @@ export function PokeList() {
           Previous
         </button>
 
-        <span>
-          {(offset / LIMIT) + 1} {/*  */}
-        </span>
+        <div className="flex items-center justify-center gap-2 w-full ">
+          <button onClick={() => setOffset(0)}>
+            <House size={18} weight="regular" />
+          </button>
+
+          <span>/</span>
+
+          <span>{(offset / LIMIT) + 1}</span>
+        </div>
 
         <button
           onClick={toNextPage}
