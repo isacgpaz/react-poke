@@ -40,6 +40,10 @@ export function PokeList() {
           Previous
         </button>
 
+        <span>
+          {(offset / LIMIT) + 1} {/*  */}
+        </span>
+
         <button
           onClick={toNextPage}
           disabled={!data?.next}

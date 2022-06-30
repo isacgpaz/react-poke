@@ -19,7 +19,7 @@ export function Home() {
 
           <input
             placeholder="What pokémon are you looking for?"
-            className="w-full py-4 text-sm text-white bg-slate-200 rounded-xl pl-12 focus:outline-none focus:bg-slate-200 focus:text-gray-900"
+            className="w-full py-4 text-sm bg-slate-200 rounded-xl pl-12 focus:outline-none focus:text-gray-900 focus:ring-2 ring-gray-700 transition-colors"
           />
         </div>
       </div>
