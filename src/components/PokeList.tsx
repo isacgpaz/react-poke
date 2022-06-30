@@ -1,8 +1,10 @@
+import classNames from "classnames";
 import { ArrowLeft, ArrowRight, House } from "phosphor-react";
 import { useState } from "react";
 import { usePokemons } from "../hooks/usePokemons";
 import { PokeCard } from "./PokeCard";
 import { Spinner } from "./Spinner";
+import { useList } from "../hooks/useList";
 
 const LIMIT = 10;
 const INITIAL_OFFSET = 0;
@@ -10,6 +12,7 @@ const INITIAL_OFFSET = 0;
 export function PokeList() {
   const [offset, setOffset] = useState(INITIAL_OFFSET);
 
+  const { isGrid } = useList();
   const { data, isLoading } = usePokemons({ limit: LIMIT, offset });
 
   const toPreviousPage = () => {
@@ -28,7 +31,12 @@ export function PokeList() {
 
   return (
     <div className="flex flex-col gap-8 w-full">
-      {data?.results?.map((pokemon) => <PokeCard key={pokemon?.order} {...pokemon} />)}
+      <div className={classNames({
+        "flex flex-col gap-8": !isGrid,
+        "grid grid-cols-2 gap-4": isGrid
+      })}>
+        {data?.results?.map((pokemon) => <PokeCard key={pokemon?.order} {...pokemon} />)}
+      </div>
 
       <div className="flex justify-between">
         <button
