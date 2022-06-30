@@ -1,6 +1,9 @@
 export type PokemonType = {
   name: string;
   order: number;
+  height: number;
+  weight: number;
+  base_experience: number;
   color: {
     name: string;
   };
@@ -15,7 +18,13 @@ export type PokemonType = {
     type: {
       name: string;
     }
-  }]
+  }];
+  stats: [{
+    base_stat: 45,
+    stat: {
+      name: string;
+    }
+  }];
 }
 
 export type ListPokemonRequestType = {
