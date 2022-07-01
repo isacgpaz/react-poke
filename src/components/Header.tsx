@@ -1,15 +1,17 @@
 import { DotsNine, GithubLogo, Heart, List } from "phosphor-react";
 import { Link } from "react-router-dom";
+import { INITIAL_OFFSET } from "../constants/list";
 import { useList } from "../hooks/useList";
 
 export function Header() {
-  const { isGrid, toggleGrid } = useList();
+  const { isGrid, setOffset, toggleGrid } = useList();
 
   return (
     <div className="flex items-center justify-between w-full">
       <Link
         to="/"
         className="text-3xl font-bold text-orange-500"
+        onClick={() => setOffset(INITIAL_OFFSET)}
       >
         React Poké
       </Link>

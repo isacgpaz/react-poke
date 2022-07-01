@@ -2,7 +2,7 @@ import { PokemonType } from "../interfaces/pokemon";
 import { RequestListOptionsType } from "../interfaces/request";
 import { api } from "./api";
 
-async function getPokemonSpecieRequest(nameOrId: string) {
+export async function getPokemonSpecieRequest(nameOrId: string) {
   const res = await api.get(`pokemon-species/${nameOrId}`);
   return res.data;
 }

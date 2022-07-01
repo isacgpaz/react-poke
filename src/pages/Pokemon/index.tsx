@@ -2,19 +2,20 @@ import classNames from "classnames";
 import { ArrowLeft, Barbell, FireSimple, Heart, Ladder, ShareNetwork } from "phosphor-react";
 import { useNavigate, useParams } from "react-router-dom";
 import { PokeTypeBadge } from "../../components/PokeTypeBadge";
-import { usePokemon } from "../../hooks/usePokemons";
+import { usePokemon, usePokemonSpecie } from "../../hooks/usePokemons";
 
 export function Pokemon() {
   const { name } = useParams<string>();
   const navigate = useNavigate();
 
   const { data: pokemon } = usePokemon(name as string);
+  const { data: pokemonSpecie } = usePokemonSpecie(name as string);
 
   return (
     <div className="flex flex-col gap-12">
       <div className={classNames(
         "flex flex-col gap-4 items-center min-h-[30vh] relative p-8",
-        pokemon?.types[0].type.name
+        pokemonSpecie?.color.name
       )}>
         <div className="flex justify-between w-full">
           <button
@@ -35,7 +36,7 @@ export function Pokemon() {
           </div>
         </div>
 
-        <span className="font-bold text-9xl opacity-[15%]">
+        <span className="font-bold text-9xl opacity-[35%]">
           {`#${String(pokemon?.order).padStart(3, "0")}`}
         </span>
 
@@ -53,7 +54,9 @@ export function Pokemon() {
           </h1>
 
           <div className="flex gap-2">
-            {pokemon?.types.map(({ type }) => <PokeTypeBadge key={type.name} title={type.name} />)}
+            {pokemon?.types.map(({ type }) => (
+              <PokeTypeBadge key={type.name} title={type.name} />
+            ))}
           </div>
         </div>
 
@@ -118,12 +121,12 @@ export function Pokemon() {
                     <div
                       className={classNames(
                         "flex items-center justify-end px-2 py-0.5 rounded-full",
-                        pokemon?.types[0].type.name
+                        pokemonSpecie?.color.name
                       )}
                       style={{ width: `${(base_stat * 100) / 200}%` }}
                     >
                       <span className="text-xs text-white">
-                        {base_stat}%
+                        {base_stat}
                       </span>
                     </div>
                   </div>

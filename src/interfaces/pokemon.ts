@@ -1,12 +1,30 @@
-export type PokemonType = {
+type PokemonColorType = {
+  color: {
+    name: string;
+  }
+}
+
+export type PokemonSpecieType = PokemonColorType & {
+  flavor_text_entries: [{
+    flavor_text: string;
+    language: {
+      name: string;
+    }
+  }];
+  habitat: {
+    name: string;
+  };
+  shape: {
+    name: string;
+  }
+}
+
+export type PokemonType = PokemonColorType & {
   name: string;
   order: number;
   height: number;
   weight: number;
   base_experience: number;
-  color: {
-    name: string;
-  };
   sprites: {
     other: {
       "official-artwork": {
