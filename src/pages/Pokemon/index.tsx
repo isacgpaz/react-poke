@@ -11,6 +11,8 @@ export function Pokemon() {
   const { data: pokemon } = usePokemon(name as string);
   const { data: pokemonSpecie } = usePokemonSpecie(name as string);
 
+  const randomNumber = Math.floor(Math.random() * 10);
+
   return (
     <div className="flex flex-col gap-12">
       <div className={classNames(
@@ -70,7 +72,7 @@ export function Pokemon() {
               </span>
 
               <span className="font-normal text-xs">
-                Lbs
+                hg
               </span>
             </div>
           </div>
@@ -84,7 +86,7 @@ export function Pokemon() {
               </span>
 
               <span className="font-normal text-xs">
-                Meters
+                dm
               </span>
             </div>
           </div>
