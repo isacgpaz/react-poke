@@ -111,7 +111,7 @@ export function Pokemon() {
 
           <div className="flex flex-col gap-2">
             {pokemon?.stats.map(({ stat, base_stat }) => (
-              <div className="grid grid-cols-5 gap-4 items-center">
+              <div key={stat.name} className="grid grid-cols-5 gap-4 items-center">
                 <span className="col-span-2 uppercase font-medium text-sm text-right">
                   {stat.name}
                 </span>

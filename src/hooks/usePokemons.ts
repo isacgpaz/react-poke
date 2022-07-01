@@ -6,26 +6,26 @@ import { getPokemonRequest, getPokemonSpecieRequest, getPokemonsRequest } from "
 export const usePokemons = (requestListOptions?: RequestListOptionsType) => {
   return useQuery<ListPokemonRequestType>(
     ["pokemons", requestListOptions],
-    () => getPokemonsRequest(requestListOptions)
+    () => getPokemonsRequest(requestListOptions),
   );
 }
 
-export const usePokemon = (nameOrId: string) => {
+export const usePokemon = (name: string) => {
   return useQuery<PokemonType>(
-    ["pokemon", nameOrId],
-    () => getPokemonRequest(nameOrId),
+    `pokemon-${name}`,
+    () => getPokemonRequest(name),
     {
-      enabled: !!nameOrId
+      enabled: !!name,
     }
   );
 }
 
-export const usePokemonSpecie = (nameOrId: string) => {
+export const usePokemonSpecie = (name: string) => {
   return useQuery<PokemonSpecieType>(
-    ["pokemon-specie", nameOrId],
-    () => getPokemonSpecieRequest(nameOrId),
+    `pokemonSpecie-${name}`,
+    () => getPokemonSpecieRequest(name),
     {
-      enabled: !!nameOrId
+      enabled: !!name,
     }
   );
 }

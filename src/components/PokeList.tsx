@@ -16,7 +16,7 @@ export function PokeList() {
     toNextPage
   } = useList();
 
-  const { data, isLoading } = usePokemons({ limit, offset });
+  const { data: list, isLoading } = usePokemons({ limit, offset });
 
   if (isLoading) {
     return (
@@ -30,13 +30,15 @@ export function PokeList() {
         "flex flex-col gap-8": !isGrid,
         "grid grid-cols-2 gap-4": isGrid
       })}>
-        {data?.results?.map((pokemon) => <PokeCard key={pokemon?.order} {...pokemon} />)}
+        {list?.results?.map((pokemon) => (
+          <PokeCard key={pokemon?.name} {...pokemon} />
+        ))}
       </div>
 
       <div className="flex justify-between">
         <button
           onClick={toPreviousPage}
-          disabled={!data?.previous}
+          disabled={!list?.previous}
           className="flex items-center justify-center gap-2 text-sm disabled:opacity-50 disabled:cursor-no-drop"
         >
           <ArrowLeft weight="bold" />
@@ -55,7 +57,7 @@ export function PokeList() {
 
         <button
           onClick={toNextPage}
-          disabled={!data?.next}
+          disabled={!list?.next}
           className="flex items-center justify-center gap-2 text-sm disabled:opacity-50 disabled:cursor-no-drop"
         >
           Next
