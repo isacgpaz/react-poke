@@ -16,15 +16,21 @@ export type PokemonSpecieType = PokemonColorType & {
   };
   shape: {
     name: string;
-  }
+  },
+  has_gender_differences: boolean;
 }
 
 export type PokemonType = PokemonColorType & {
   name: string;
-  order: number;
+  id: number;
   height: number;
   weight: number;
   base_experience: number;
+  abilities: [{
+    ability: {
+      name: string;
+    }
+  }];
   sprites: {
     other: {
       "official-artwork": {

@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { ArrowLeft, Barbell, FireSimple, Heart, Ladder, ShareNetwork } from "phosphor-react";
+import { ArrowLeft, Barbell, FireSimple, Graph, Heart, Ladder, ShareNetwork, Tree } from "phosphor-react";
 import { useNavigate, useParams } from "react-router-dom";
 import { PokeTypeBadge } from "../../components/PokeTypeBadge";
 import { usePokemon, usePokemonSpecie } from "../../hooks/usePokemons";
@@ -12,13 +12,16 @@ export function Pokemon() {
   const { data: pokemonSpecie } = usePokemonSpecie(name as string);
 
   const randomNumber = Math.floor(Math.random() * 10);
+  const englishDescriptions = pokemonSpecie?.flavor_text_entries.filter(
+    ({ language }) => language.name === "en"
+  );
 
   return (
-    <div className="flex flex-col gap-12">
-      <div className={classNames(
-        "flex flex-col gap-4 items-center min-h-[30vh] relative p-8",
-        pokemonSpecie?.color.name
-      )}>
+    <div className={classNames(
+      "flex flex-col",
+      pokemonSpecie?.color.name
+    )}>
+      <div className="flex flex-col gap-4 min-h-[30vh] items-center relative p-8">
         <div className="flex justify-between w-full">
           <button
             onClick={() => navigate(-1)}
@@ -39,7 +42,7 @@ export function Pokemon() {
         </div>
 
         <span className="font-bold text-9xl opacity-[35%]">
-          {`#${String(pokemon?.order).padStart(3, "0")}`}
+          {pokemon?.id && `#${String(pokemon.id).padStart(3, "0")}`}
         </span>
 
         <img
@@ -49,7 +52,7 @@ export function Pokemon() {
         />
       </div>
 
-      <div className="flex flex-col gap-8 p-8">
+      <div className="flex flex-col gap-8 px-8 py-20 bg-white rounded-t-[1.75rem]">
         <div className="flex flex-col items-center justify-center gap-2">
           <h1 className="capitalize font-bold text-3xl text-slate-900">
             {pokemon?.name}
@@ -62,9 +65,13 @@ export function Pokemon() {
           </div>
         </div>
 
-        <div className="flex justify-between items-center px-5">
+        <p className="text-sm text-slate-500">
+          {englishDescriptions?.[randomNumber].flavor_text.replaceAll("\f", "")}
+        </p>
+
+        <div className="flex justify-between items-center px-5 text-slate-700">
           <div className="flex flex-col items-center gap-1">
-            <Barbell size={32} weight="regular" className="text-slate-700" />
+            <Barbell size={32} weight="regular" />
 
             <div className="flex flex-col items-center">
               <span className="text-2xl font-bold">
@@ -78,7 +85,7 @@ export function Pokemon() {
           </div>
 
           <div className="flex flex-col items-center gap-1">
-            <Ladder size={32} weight="regular" className="text-slate-700" />
+            <Ladder size={32} weight="regular" />
 
             <div className="flex flex-col items-center">
               <span className="text-2xl font-bold">
@@ -92,7 +99,7 @@ export function Pokemon() {
           </div>
 
           <div className="flex flex-col items-center gap-1">
-            <FireSimple size={32} weight="regular" className="text-slate-700" />
+            <FireSimple size={32} weight="regular" />
 
             <div className="flex flex-col items-center">
               <span className="text-2xl font-bold">
@@ -106,12 +113,12 @@ export function Pokemon() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center gap-5">
-          <h2 className="font-medium text-lg text-slate-900">
+        <div className="flex flex-col gap-5">
+          <h2 className="font-medium text-lg text-slate-900 text-center">
             Base Stats
           </h2>
 
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 text-slate-700">
             {pokemon?.stats.map(({ stat, base_stat }) => (
               <div key={stat.name} className="grid grid-cols-5 gap-4 items-center">
                 <span className="col-span-2 uppercase font-medium text-sm text-right">
@@ -135,6 +142,56 @@ export function Pokemon() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+
+        <div className="flex flex-col items-center gap-2">
+          <h2 className="font-medium text-lg text-slate-900">
+            Abilities
+          </h2>
+
+          <ul className="flex gap-2">
+            {pokemon?.abilities.map(({ ability }) => (
+              <li className="capitalize text-sm text-slate-500 rounded-xl px-3 border-2 border-slate-500">
+                {ability.name}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="flex flex-col items-center gap-2">
+          <h2 className="font-medium text-lg text-slate-900">
+            Other informations
+          </h2>
+
+          <div className="w-full flex justify-between items-center px-5 text-slate-700">
+            <div className="flex flex-col items-center gap-1">
+              <Tree size={32} weight="regular" />
+
+              <div className="flex flex-col items-center">
+                <span className="text-2xl font-bold capitalize">
+                  {pokemonSpecie?.habitat.name}
+                </span>
+
+                <span className="font-normal text-xs">
+                  Habitat
+                </span>
+              </div>
+            </div>
+
+            <div className="flex flex-col items-center gap-1">
+              <Graph size={32} weight="regular" />
+
+              <div className="flex flex-col items-center">
+                <span className="text-2xl font-bold capitalize">
+                  {pokemonSpecie?.shape.name}
+                </span>
+
+                <span className="font-normal text-xs">
+                  Shape
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

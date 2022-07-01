@@ -30,7 +30,7 @@ export function PokeCard({ name }: PokeCardProps) {
             <span className={classNames("font-bold text-sm", {
               "absolute top-3.5 left-3.5": isGrid
             })}>
-              {`#${String(pokemon?.order).padStart(3, "0")}`}
+              {pokemon?.id && `#${String(pokemon?.id).padStart(3, "0")}`}
             </span>
 
             {!isGrid && (
