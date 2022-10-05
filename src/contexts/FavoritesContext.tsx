@@ -9,6 +9,7 @@ type FavoritesContextProps = {
   favoritesPokemons: PokemonType[];
   addPokemonToFavoritesList: (pokemon: PokemonType) => void;
   removePokemonToFavoritesList: (pokemon: PokemonType) => void;
+  clearFavoritesList: () => void;
 };
 
 export const FavoritesContext = createContext({} as FavoritesContextProps);
@@ -49,13 +50,23 @@ export function FavoritesProvider({ children }: FavoritesProviderProps) {
     }
   }
 
+  function clearFavoritesList(): void {
+    setFavoritesPokemons([]);
+  }
+
   const contextValues = useMemo(
     () => ({
       favoritesPokemons,
       addPokemonToFavoritesList,
       removePokemonToFavoritesList,
+      clearFavoritesList,
     }),
-    [favoritesPokemons, addPokemonToFavoritesList, removePokemonToFavoritesList]
+    [
+      favoritesPokemons,
+      addPokemonToFavoritesList,
+      removePokemonToFavoritesList,
+      clearFavoritesList,
+    ]
   );
 
   return (

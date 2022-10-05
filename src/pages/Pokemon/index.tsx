@@ -46,7 +46,7 @@ export function Pokemon() {
               <ShareNetwork size={24} weight="bold" />
             </button>
 
-            {favoritesPokemons.some(({ id }) => id === pokemon?.id) ? (
+            {favoritesPokemons?.some(({ id }) => id === pokemon?.id) ? (
               <button
                 className="text-white"
                 onClick={() => pokemon && removePokemonToFavoritesList(pokemon)}
@@ -182,7 +182,7 @@ export function Pokemon() {
 
               <div className="flex flex-col items-center">
                 <span className="text-2xl font-bold capitalize">
-                  {pokemonSpecie?.habitat.name}
+                  {pokemonSpecie?.habitat?.name}
                 </span>
 
                 <span className="font-normal text-xs">Habitat</span>
@@ -194,7 +194,7 @@ export function Pokemon() {
 
               <div className="flex flex-col items-center">
                 <span className="text-2xl font-bold capitalize">
-                  {pokemonSpecie?.shape.name}
+                  {pokemonSpecie?.shape?.name}
                 </span>
 
                 <span className="font-normal text-xs">Shape</span>
