@@ -1,69 +1,74 @@
 import classNames from "classnames";
 import { ArrowLeft, ArrowRight, House } from "phosphor-react";
-import { usePokemons } from "../hooks/usePokemons";
+import { LIMIT } from "../constants/list";
+import { useList } from "../hooks/useList";
+import { usePokemon, usePokemons } from "../hooks/usePokemons";
 import { PokeCard } from "./PokeCard";
 import { Spinner } from "./Spinner";
-import { useList } from "../hooks/useList";
-import { LIMIT } from "../constants/list";
 
-export function PokeList() {
-  const {
-    isGrid,
-    limit,
-    offset,
-    setOffset,
-    toPreviousPage,
-    toNextPage
-  } = useList();
+type PokeListProps = {
+  search: string;
+};
+
+export function PokeList({ search }: PokeListProps) {
+  const { isGrid, limit, offset, setOffset, toPreviousPage, toNextPage } =
+    useList();
 
   const { data: list, isLoading } = usePokemons({ limit, offset });
+  const { data: pokemon } = usePokemon(search);
 
   if (isLoading) {
-    return (
-      <Spinner />
-    )
+    return <Spinner />;
   }
 
   return (
-    <div className="flex flex-col gap-8 w-full">
-      <div className={classNames({
-        "flex flex-col gap-8": !isGrid,
-        "grid grid-cols-2 gap-4": isGrid
-      })}>
-        {list?.results?.map((pokemon) => (
-          <PokeCard key={pokemon?.name} {...pokemon} />
-        ))}
+    <div className="flex flex-col gap-8 justify-between w-full flex-1">
+      <div
+        className={classNames({
+          "flex flex-col gap-8": !isGrid,
+          "grid grid-cols-2 gap-4": isGrid,
+        })}
+      >
+        {pokemon ? (
+          <PokeCard {...pokemon} />
+        ) : (
+          list?.results?.map((pokemon) => (
+            <PokeCard key={pokemon?.name} {...pokemon} />
+          ))
+        )}
       </div>
 
-      <div className="flex justify-between">
-        <button
-          onClick={toPreviousPage}
-          disabled={!list?.previous}
-          className="flex items-center justify-center gap-2 text-sm disabled:opacity-50 disabled:cursor-no-drop"
-        >
-          <ArrowLeft weight="bold" />
-          Previous
-        </button>
-
-        <div className="flex items-center justify-center gap-2 w-full ">
-          <button onClick={() => setOffset(0)}>
-            <House size={18} weight="regular" />
+      {!pokemon && (
+        <div className="flex justify-between pb-4">
+          <button
+            onClick={toPreviousPage}
+            disabled={!list?.previous}
+            className="flex items-center justify-center gap-2 text-sm disabled:opacity-50 disabled:cursor-no-drop"
+          >
+            <ArrowLeft weight="bold" />
+            Previous
           </button>
 
-          <span>/</span>
+          <div className="flex items-center justify-center gap-2 w-full ">
+            <button onClick={() => setOffset(0)}>
+              <House size={18} weight="regular" />
+            </button>
 
-          <span>{(offset / LIMIT) + 1}</span>
+            <span>/</span>
+
+            <span>{offset / LIMIT + 1}</span>
+          </div>
+
+          <button
+            onClick={toNextPage}
+            disabled={!list?.next}
+            className="flex items-center justify-center gap-2 text-sm disabled:opacity-50 disabled:cursor-no-drop"
+          >
+            Next
+            <ArrowRight weight="bold" />
+          </button>
         </div>
-
-        <button
-          onClick={toNextPage}
-          disabled={!list?.next}
-          className="flex items-center justify-center gap-2 text-sm disabled:opacity-50 disabled:cursor-no-drop"
-        >
-          Next
-          <ArrowRight weight="bold" />
-        </button>
-      </div>
+      )}
     </div>
   );
 }
