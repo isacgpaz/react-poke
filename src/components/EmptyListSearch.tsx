@@ -11,11 +11,12 @@ export function EmptyListSearch() {
         </p>
       </div>
 
-      <div className="flex items-center gap-2">
-        <Lightbulb />
+      <div className="flex gap-2">
+        <Lightbulb size={20} />
 
         <p className="text-xs">
-          <span className="font-bold">TIP:</span> Try pokémon full name
+          <span className="font-bold">TIP:</span> Try pokémon full name or using
+          its National Pokémon number.
         </p>
       </div>
     </div>

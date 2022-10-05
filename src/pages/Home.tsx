@@ -11,7 +11,9 @@ export function Home() {
       <Header />
 
       <div className="flex flex-col gap-4 w-full">
-        <p className="text-sm text-slate-500">Search for a pokémon by name.</p>
+        <p className="text-sm text-slate-500">
+          Search for a pokémon by name or using its National Pokémon number.
+        </p>
 
         <div className="relative text-gray-700">
           <span className="absolute inset-y-0 left-0 flex items-center pl-5">
