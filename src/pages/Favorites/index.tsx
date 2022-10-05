@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { ShareNetwork } from "phosphor-react";
 import { Header } from "../../components/Header";
 import { PokeCard } from "../../components/PokeCard";
 import { useFavorites } from "../../hooks/useFavorites";
@@ -9,19 +10,20 @@ export function Favorites() {
   const { isGrid } = useList();
 
   return (
-    <div className="flex flex-col gap-8 p-8 items-center h-screen">
+    <div className="flex flex-col gap-8 p-8 items-center h-screen overflow-auto">
       <Header showFavoritesButton={false} />
 
       <div className="w-full">
         <h1 className="text-xl font-bold">
-          My Pokémons ({favoritesPokemons.length}/10)
+          My Pokédex ({favoritesPokemons.length}/10)
         </h1>
+
         <p className="text-sm text-slate-500">
           Your favorite pokémons will be listed here.
         </p>
       </div>
 
-      <div className="w-full">
+      <div className="flex flex-col w-full gap-8">
         {favoritesPokemons.length ? (
           <div
             className={classNames({
@@ -36,6 +38,11 @@ export function Favorites() {
         ) : (
           <p>Empty list.</p>
         )}
+
+        <button className="bg-orange-500 text-white text-lg font-medium rounded-md py-2 w-full self-center flex items-center justify-center gap-1">
+          <ShareNetwork weight="bold" />
+          Show the world your pokedex!
+        </button>
       </div>
     </div>
   );
