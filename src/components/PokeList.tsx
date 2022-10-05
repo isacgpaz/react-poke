@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight, House } from "phosphor-react";
 import { LIMIT } from "../constants/list";
 import { useList } from "../hooks/useList";
 import { usePokemon, usePokemons } from "../hooks/usePokemons";
+import { EmptyListSearch } from "./EmptyListSearch";
 import { PokeCard } from "./PokeCard";
 import { Spinner } from "./Spinner";
 
@@ -14,11 +15,22 @@ export function PokeList({ search }: PokeListProps) {
   const { isGrid, limit, offset, setOffset, toPreviousPage, toNextPage } =
     useList();
 
-  const { data: list, isLoading } = usePokemons({ limit, offset });
-  const { data: pokemon } = usePokemon(search);
+  const { data: list, isLoading } = usePokemons({
+    limit,
+    offset,
+  });
+  const {
+    data: pokemon,
+    isLoading: isPokemonDetailsLoading,
+    isError: isPokemonDetailsError,
+  } = usePokemon(search);
 
-  if (isLoading) {
+  if (isLoading || isPokemonDetailsLoading) {
     return <Spinner />;
+  }
+
+  if (isPokemonDetailsError) {
+    return <EmptyListSearch></EmptyListSearch>;
   }
 
   return (
