@@ -5,10 +5,12 @@ import { Pokemon } from "./pages/Pokemon";
 
 export function App() {
   return (
-    <Routes>
-      <Route index element={<Home />} />
-      <Route path="pokemon/:name" element={<Pokemon />} />
-      <Route path="favorites" element={<Favorites />} />
-    </Routes>
+    <div className="max-w-md mx-auto">
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="pokemon/:name" element={<Pokemon />} />
+        <Route path="favorites" element={<Favorites />} />
+      </Routes>
+    </div>
   );
 }
