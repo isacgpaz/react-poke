@@ -7,7 +7,6 @@ import {
   Heart,
   Ladder,
   ShareNetwork,
-  ThumbsDown,
   Tree,
 } from "phosphor-react";
 import { Link, useParams } from "react-router-dom";
@@ -51,14 +50,14 @@ export function Pokemon() {
                 className="text-white"
                 onClick={() => pokemon && removePokemonToFavoritesList(pokemon)}
               >
-                <ThumbsDown size={32} weight="fill" />
+                <Heart size={32} weight="fill" />
               </button>
             ) : (
               <button
                 className="text-white"
                 onClick={() => pokemon && addPokemonToFavoritesList(pokemon)}
               >
-                <Heart size={32} weight="fill" />
+                <Heart size={32} />
               </button>
             )}
           </div>
