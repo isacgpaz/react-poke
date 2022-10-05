@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useMemo, useState } from "react";
+import { createContext, ReactNode, useEffect, useMemo, useState } from "react";
 import { PokemonType } from "../interfaces/pokemon";
 
 type FavoritesProviderProps = {
@@ -14,7 +14,20 @@ type FavoritesContextProps = {
 export const FavoritesContext = createContext({} as FavoritesContextProps);
 
 export function FavoritesProvider({ children }: FavoritesProviderProps) {
-  const [favoritesPokemons, setFavoritesPokemons] = useState<PokemonType[]>([]);
+  const storagedFavoritesPokemons = localStorage.getItem(
+    "@react-poke-by-isacgpaz:"
+  );
+
+  const [favoritesPokemons, setFavoritesPokemons] = useState<PokemonType[]>(
+    storagedFavoritesPokemons ? JSON.parse(storagedFavoritesPokemons) : []
+  );
+
+  useEffect(() => {
+    localStorage.setItem(
+      "@react-poke-by-isacgpaz:",
+      JSON.stringify(favoritesPokemons)
+    );
+  }, [favoritesPokemons]);
 
   function addPokemonToFavoritesList(pokemon: PokemonType): void {
     if (
