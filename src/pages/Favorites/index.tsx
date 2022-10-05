@@ -1,5 +1,6 @@
 import classNames from "classnames";
-import { ShareNetwork } from "phosphor-react";
+import { Compass, ShareNetwork } from "phosphor-react";
+import { Link } from "react-router-dom";
 import { Header } from "../../components/Header";
 import { PokeCard } from "../../components/PokeCard";
 import { useFavorites } from "../../hooks/useFavorites";
@@ -23,7 +24,7 @@ export function Favorites() {
         </p>
       </div>
 
-      <div className="flex flex-col w-full gap-8">
+      <div className="flex flex-1 flex-col w-full gap-8">
         {favoritesPokemons.length ? (
           <>
             <div
@@ -52,7 +53,20 @@ export function Favorites() {
             </div>
           </>
         ) : (
-          <p>Empty list.</p>
+          <div className="flex flex-col items-center gap-1 text-gray-400 mt-5">
+            <Compass size={40} />
+
+            <p className="text-center">
+              Shall we go out to catch some pokémons?
+            </p>
+
+            <Link
+              to="/"
+              className="bg-orange-500 text-white text-lg font-medium rounded-md py-2 px-4 mt-4"
+            >
+              Explore
+            </Link>
+          </div>
         )}
       </div>
     </div>
