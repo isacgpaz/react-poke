@@ -23,14 +23,14 @@ export function PokeList({ search }: PokeListProps) {
     data: pokemon,
     isLoading: isPokemonDetailsLoading,
     isError: isPokemonDetailsError,
-  } = usePokemon(search);
+  } = usePokemon(search.toLocaleLowerCase());
 
   if (isLoading || isPokemonDetailsLoading) {
     return <Spinner />;
   }
 
   if (isPokemonDetailsError) {
-    return <EmptyListSearch></EmptyListSearch>;
+    return <EmptyListSearch />;
   }
 
   return (
