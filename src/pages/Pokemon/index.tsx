@@ -47,14 +47,14 @@ export function Pokemon() {
 
             {favoritesPokemons?.some(({ id }) => id === pokemon?.id) ? (
               <button
-                className="text-white"
+                className="text-white transition-transform active:scale-125"
                 onClick={() => pokemon && removePokemonToFavoritesList(pokemon)}
               >
                 <Heart size={32} weight="fill" />
               </button>
             ) : (
               <button
-                className="text-white"
+                className="text-white transition-transform active:scale-125"
                 onClick={() => pokemon && addPokemonToFavoritesList(pokemon)}
               >
                 <Heart size={32} />
