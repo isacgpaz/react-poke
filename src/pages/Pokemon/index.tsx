@@ -6,7 +6,6 @@ import {
   Graph,
   Heart,
   Ladder,
-  ShareNetwork,
   Tree,
 } from "phosphor-react";
 import { useEffect, useState } from "react";
@@ -52,9 +51,9 @@ export function Pokemon() {
           </Link>
 
           <div className="flex gap-4">
-            <button className="text-white">
+            {/* <button className="text-white">
               <ShareNetwork size={24} weight="bold" />
-            </button>
+            </button> */}
 
             {favoritesPokemons?.some(({ id }) => id === pokemon?.id) ? (
               <button

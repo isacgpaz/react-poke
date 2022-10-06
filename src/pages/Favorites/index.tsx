@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { Compass, ShareNetwork } from "phosphor-react";
+import { Compass } from "phosphor-react";
 import { Link } from "react-router-dom";
 import { Header } from "../../components/Header";
 import { PokeCard } from "../../components/PokeCard";
@@ -39,17 +39,24 @@ export function Favorites() {
             </div>
 
             <div className="flex flex-col gap-4">
-              <button className="bg-orange-500 text-white text-lg font-medium rounded-md py-2 w-full self-center flex items-center justify-center gap-1">
+              {/* <button className="bg-orange-500 text-white text-lg font-medium rounded-md py-2 w-full self-center flex items-center justify-center gap-1">
                 <ShareNetwork weight="bold" />
                 Show the world your pokedex!
-              </button>
+              </button> */}
 
               <button
+                onClick={clearFavoritesList}
+                className="bg-zinc-500 text-white text-lg font-medium rounded-lg py-2 w-full self-center flex items-center justify-center gap-1"
+              >
+                Clear pokedéx
+              </button>
+
+              {/* <button
                 onClick={clearFavoritesList}
                 className="text-sm uppercase font-bold text-zinc-500"
               >
                 Clear pokedéx
-              </button>
+              </button> */}
             </div>
           </>
         ) : (
