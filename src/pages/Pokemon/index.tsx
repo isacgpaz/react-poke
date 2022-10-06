@@ -25,7 +25,7 @@ export function Pokemon() {
   } = useFavorites();
 
   const { data: pokemon } = usePokemon(name as string);
-  const { data: pokemonSpecie } = usePokemonSpecie(name as string);
+  const { data: pokemonSpecie, isSuccess } = usePokemonSpecie(name as string);
 
   const randomNumber = Math.floor(Math.random() * 10);
 
@@ -36,12 +36,12 @@ export function Pokemon() {
   const [description, setDescription] = useState<string>("");
 
   useEffect(() => {
-    if (englishDescriptions) {
+    if (isSuccess && englishDescriptions) {
       setDescription(
         englishDescriptions[randomNumber].flavor_text.replaceAll("\f", "")
       );
     }
-  }, [name]);
+  }, [isSuccess]);
 
   return (
     <div className={classNames("flex flex-col", pokemonSpecie?.color.name)}>
@@ -172,7 +172,10 @@ export function Pokemon() {
 
           <ul className="flex gap-2">
             {pokemon?.abilities.map(({ ability }) => (
-              <li className="capitalize text-sm text-slate-500 rounded-xl px-3 border-2 border-slate-500">
+              <li
+                key={ability.name}
+                className="capitalize text-sm text-slate-500 rounded-xl px-3 border-2 border-slate-500"
+              >
                 {ability.name}
               </li>
             ))}
