@@ -20,7 +20,7 @@ export const usePokemons = (requestListOptions?: RequestListOptionsType) => {
 
 export const usePokemon = (name: string) => {
   return useQuery<PokemonType>(
-    `pokemon-${name}`,
+    ["pokemon", name],
     () => getPokemonRequest(name),
     {
       enabled: !!name,
@@ -31,7 +31,7 @@ export const usePokemon = (name: string) => {
 
 export const usePokemonSpecie = (name: string) => {
   return useQuery<PokemonSpecieType>(
-    `pokemonSpecie-${name}`,
+    ["pokemonSpecie", name],
     () => getPokemonSpecieRequest(name),
     {
       enabled: !!name,

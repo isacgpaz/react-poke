@@ -9,6 +9,7 @@ import {
   ShareNetwork,
   Tree,
 } from "phosphor-react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { PokeTypeBadge } from "../../components/PokeTypeBadge";
 import { useFavorites } from "../../hooks/useFavorites";
@@ -31,6 +32,16 @@ export function Pokemon() {
   const englishDescriptions = pokemonSpecie?.flavor_text_entries.filter(
     ({ language }) => language.name === "en"
   );
+
+  const [description, setDescription] = useState<string>("");
+
+  useEffect(() => {
+    if (englishDescriptions) {
+      setDescription(
+        englishDescriptions[randomNumber].flavor_text.replaceAll("\f", "")
+      );
+    }
+  }, [name]);
 
   return (
     <div className={classNames("flex flex-col", pokemonSpecie?.color.name)}>
@@ -87,9 +98,7 @@ export function Pokemon() {
           </div>
         </div>
 
-        <p className="text-sm text-slate-500">
-          {englishDescriptions?.[randomNumber].flavor_text.replaceAll("\f", "")}
-        </p>
+        <p className="text-sm text-slate-500">{description}</p>
 
         <div className="flex justify-between items-center px-5 text-slate-700">
           <div className="flex flex-col items-center gap-1">
