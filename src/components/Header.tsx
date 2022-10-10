@@ -13,7 +13,7 @@ export function Header({ showFavoritesButton = true }: HeaderProps) {
   const { favoritesPokemons } = useFavorites();
 
   return (
-    <div className="flex items-center justify-between w-full">
+    <div className="flex items-center justify-between w-full ">
       <Link
         to="/"
         className="text-3xl font-bold text-orange-500"
@@ -22,8 +22,11 @@ export function Header({ showFavoritesButton = true }: HeaderProps) {
         React Poké
       </Link>
 
-      <div className="flex justify-end gap-4">
-        <button className="text-slate-900" onClick={toggleGrid}>
+      <div className="flex items-center justify-end gap-4">
+        <button
+          className="text-slate-900 rounded-full w-10 h-10 flex items-center justify-center hover:bg-gray-200 active:bg-gray-300 transition-colors"
+          onClick={toggleGrid}
+        >
           {isGrid ? (
             <List weight="regular" size={24} />
           ) : (
@@ -34,20 +37,29 @@ export function Header({ showFavoritesButton = true }: HeaderProps) {
         <a
           href="https://github.com/isacgpaz"
           className="flex items-center text-slate-900"
+          target={"_blank"}
         >
           <GithubLogo weight="fill" size={24} />
         </a>
 
         {showFavoritesButton ? (
           <Link to="favorites" className="relative">
-            <Heart weight="fill" size={32} className="text-orange-500" />
+            <Heart
+              weight="fill"
+              size={32}
+              className="text-orange-500 hover:text-orange-600 active:text-orange-700 transition-colors"
+            />
             <span className="text-white font-bold text-[10px] absolute top-3/4 left-3/4 transform -translate-x-1/2 -translate-y-1/2 bg-zinc-500 w-4 h-4 flex items-center justify-center rounded-full">
               {favoritesPokemons.length}
             </span>
           </Link>
         ) : (
           <Link to="/">
-            <House weight="fill" size={32} className="text-orange-500" />
+            <House
+              weight="fill"
+              size={32}
+              className="text-orange-500 hover:text-orange-600 active:text-orange-700 transition-colors"
+            />
           </Link>
         )}
       </div>
