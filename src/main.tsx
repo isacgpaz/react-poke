@@ -11,17 +11,23 @@ import "./styles/global.css";
 
 const queryClient = new QueryClient();
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <FavoritesProvider>
-          <ListProvider>
-            <ScrollToTop />
-            <App />
-          </ListProvider>
-        </FavoritesProvider>
-      </BrowserRouter>
-    </QueryClientProvider>
-  </React.StrictMode>
-);
+const container = document.getElementById("root");
+
+if (container) {
+  ReactDOM.createRoot(container).render(
+    <React.StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <FavoritesProvider>
+            <ListProvider>
+              <ScrollToTop />
+              <App />
+            </ListProvider>
+          </FavoritesProvider>
+        </BrowserRouter>
+
+        {/* <ReactQueryDevtools></ReactQueryDevtools> */}
+      </QueryClientProvider>
+    </React.StrictMode>
+  );
+}
