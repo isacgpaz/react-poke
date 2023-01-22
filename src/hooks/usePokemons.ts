@@ -14,7 +14,10 @@ import {
 export const usePokemons = (requestListOptions?: RequestListOptionsType) => {
   return useQuery<ListPokemonRequestType>(
     ["pokemons", requestListOptions],
-    () => getPokemonsRequest(requestListOptions)
+    () => getPokemonsRequest(requestListOptions),
+    {
+      staleTime: 1000 * 60 * 30,
+    }
   );
 };
 
@@ -25,6 +28,7 @@ export const usePokemon = (name: string) => {
     {
       enabled: !!name,
       retry: false,
+      staleTime: 1000 * 60 * 30,
     }
   );
 };
@@ -35,6 +39,7 @@ export const usePokemonSpecie = (name: string) => {
     () => getPokemonSpecieRequest(name),
     {
       enabled: !!name,
+      staleTime: 1000 * 60 * 30,
     }
   );
 };
