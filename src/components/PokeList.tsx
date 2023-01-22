@@ -21,11 +21,18 @@ export function PokeList({ search }: PokeListProps) {
     limit,
     offset,
   });
+
+  const parsedIntSearch = parseInt(search);
+
+  const query = isNaN(parsedIntSearch)
+    ? search.toLocaleLowerCase()
+    : parsedIntSearch.toString();
+
   const {
     data: pokemon,
     isLoading: isPokemonDetailsLoading,
     isError: isPokemonDetailsError,
-  } = usePokemon(search.toLocaleLowerCase());
+  } = usePokemon(query);
 
   if (isLoading || isPokemonDetailsLoading) {
     return <Spinner />;
