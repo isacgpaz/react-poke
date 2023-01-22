@@ -1,11 +1,13 @@
 import classNames from "classnames";
 import { ArrowLeft, ArrowRight, House } from "phosphor-react";
-import { LIMIT } from "../constants/list";
-import { useList } from "../hooks/useList";
+
 import { usePokemon, usePokemons } from "../hooks/usePokemons";
 import { EmptyListSearch } from "./EmptyListSearch";
 import { PokeCard } from "./PokeCard";
 import { Spinner } from "./Spinner";
+
+import { LIMIT } from "../constants/list";
+import { useList } from "../hooks/useList";
 
 type PokeListProps = {
   search: string;

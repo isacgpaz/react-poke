@@ -1,5 +1,6 @@
 import { DotsNine, GithubLogo, Heart, House, List } from "phosphor-react";
 import { Link } from "react-router-dom";
+
 import { INITIAL_OFFSET } from "../constants/list";
 import { useFavorites } from "../hooks/useFavorites";
 import { useList } from "../hooks/useList";
@@ -13,7 +14,7 @@ export function Header({ showFavoritesButton = true }: HeaderProps) {
   const { favoritesPokemons } = useFavorites();
 
   return (
-    <div className="flex items-center justify-between w-full ">
+    <div className="flex items-center justify-between w-full">
       <Link
         to="/"
         className="text-3xl font-bold text-orange-500"
