@@ -35,13 +35,13 @@ export function Header({ showFavoritesButton = true }: HeaderProps) {
           )}
         </button>
 
-        <a
+        {/* <a
           href="https://github.com/isacgpaz"
           className="flex items-center text-slate-900"
           target={"_blank"}
         >
           <GithubLogo weight="fill" size={24} />
-        </a>
+        </a> */}
 
         {showFavoritesButton ? (
           <Link to="favorites" className="relative">

@@ -1,4 +1,4 @@
-import { MagnifyingGlass, XCircle } from "phosphor-react";
+import { Heart, MagnifyingGlass, XCircle } from "phosphor-react";
 import { useState } from "react";
 import { Header } from "../components/Header";
 import { PokeList } from "../components/PokeList";
@@ -7,7 +7,7 @@ export function Home() {
   const [search, setSearch] = useState("");
 
   return (
-    <div className="flex flex-col gap-8 p-8 items-center h-screen">
+    <div className="flex flex-col gap-8 p-8 pb-0 items-center min-h-screen">
       <Header />
 
       <div className="flex flex-col gap-4 w-full">
@@ -39,6 +39,15 @@ export function Home() {
       </div>
 
       <PokeList search={search} />
+
+      <div className="mb-4 max-auto">
+        <span className="flex items-center text-xs gap-1 text-zinc-600">
+          Developed with <Heart className="text-orange-500" weight="fill" /> by
+          <a href="https://github.com/isacgpaz" className="underline">
+            @isacgpaz
+          </a>
+        </span>
+      </div>
     </div>
   );
 }
