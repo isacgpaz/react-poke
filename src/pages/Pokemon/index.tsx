@@ -2,11 +2,13 @@ import classNames from "classnames";
 import {
   ArrowLeft,
   Barbell,
+  Check,
   FireSimple,
   Graph,
   Heart,
   Ladder,
   Tree,
+  X,
 } from "phosphor-react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
@@ -33,6 +35,10 @@ export function Pokemon() {
   );
 
   const [description, setDescription] = useState<string>("");
+  const [showAddPokemonAnimation, setShowAddPokemonAnimation] = useState(false);
+  const [listActionType, setListActionType] = useState<"add" | "remove" | null>(
+    null
+  );
 
   useEffect(() => {
     if (isSuccess && englishDescriptions) {
@@ -50,7 +56,7 @@ export function Pokemon() {
             <ArrowLeft size={24} weight="bold" />
           </Link>
 
-          <div className="flex gap-4">
+          <div className="flex flex-col relative">
             {/* <button className="text-white">
               <ShareNetwork size={24} weight="bold" />
             </button> */}
@@ -58,18 +64,50 @@ export function Pokemon() {
             {favoritesPokemons?.some(({ id }) => id === pokemon?.id) ? (
               <button
                 className="text-white transition-transform active:scale-125"
-                onClick={() => pokemon && removePokemonToFavoritesList(pokemon)}
+                onClick={() => {
+                  setListActionType("remove");
+                  setShowAddPokemonAnimation(true);
+
+                  pokemon && removePokemonToFavoritesList(pokemon);
+
+                  setTimeout(() => setShowAddPokemonAnimation(false), 750);
+                }}
               >
                 <Heart size={32} weight="fill" />
               </button>
             ) : (
               <button
                 className="text-white transition-transform active:scale-125"
-                onClick={() => pokemon && addPokemonToFavoritesList(pokemon)}
+                onClick={() => {
+                  setListActionType("add");
+                  setShowAddPokemonAnimation(true);
+
+                  pokemon && addPokemonToFavoritesList(pokemon);
+
+                  setTimeout(() => setShowAddPokemonAnimation(false), 750);
+                }}
               >
                 <Heart size={32} />
               </button>
             )}
+
+            <div
+              className={classNames(
+                "text-xs font-bold mx-auto text-white opacity-1 absolute -bottom-6 transform translate-x-1/2 -translate-y-1/2 flex gap-1 items-center",
+                {
+                  "animate-ping duration-75 ": showAddPokemonAnimation,
+                  "opacity-0": !showAddPokemonAnimation,
+                }
+              )}
+            >
+              {listActionType === "add" ? (
+                <Check weight="bold" size={10} />
+              ) : (
+                <X weight="bold" size={10} />
+              )}
+
+              <span>1</span>
+            </div>
           </div>
         </div>
 
